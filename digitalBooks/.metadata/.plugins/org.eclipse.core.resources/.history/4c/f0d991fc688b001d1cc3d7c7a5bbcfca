@@ -1,0 +1,23 @@
+package com.digitalbooks.userService.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.userService.entity.Subscription;
+import com.digitalbooks.userService.entity.SubscriptionRequest;
+import com.digitalbooks.userService.entity.User;
+import com.digitalbooks.userService.repository.UserRepository;
+
+@Service
+public class ReaderService {
+	@Autowired
+	UserRepository userRepo;
+	public Subscription subscribe(int id, SubscriptionRequest subscriptionRequest) {
+		User user =  userRepo.findById(id).get();
+		Subscription subscription = new Subscription(;)
+		return null;
+		
+		
+	}
+
+}

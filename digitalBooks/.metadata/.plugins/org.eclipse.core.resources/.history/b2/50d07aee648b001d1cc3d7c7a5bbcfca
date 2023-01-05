@@ -1,0 +1,5 @@
+package com.digitalbooks.userService.ent;
+
+public class Subscription {
+
+}

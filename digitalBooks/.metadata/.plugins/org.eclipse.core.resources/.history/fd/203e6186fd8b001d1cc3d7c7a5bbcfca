@@ -1,0 +1,11 @@
+package com.digitalbooks.bookService.services;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class BookService {
+
+	public Book saveBook(Book book) {
+		return  repo.save(book);
+	}
+}

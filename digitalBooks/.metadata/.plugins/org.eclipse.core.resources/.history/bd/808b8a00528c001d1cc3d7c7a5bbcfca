@@ -1,0 +1,15 @@
+package com.digitalbooks.userService.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.digitalbooks.userService.entity.Author;
+import com.digitalbooks.userService.repository.AuthorRepository;
+
+public class AuthorService {
+	@Autowired
+	private AuthorRepository repo;
+	public Author save(Author auth) {
+		return repo.save(auth);
+	}
+
+}

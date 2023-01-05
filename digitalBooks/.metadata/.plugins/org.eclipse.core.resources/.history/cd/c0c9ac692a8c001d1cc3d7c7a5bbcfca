@@ -1,0 +1,5 @@
+package com.digitalbooks.userService.filter;
+
+public class JwtRequestFilter {
+
+}

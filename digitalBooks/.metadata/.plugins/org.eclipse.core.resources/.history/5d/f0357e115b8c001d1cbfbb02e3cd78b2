@@ -1,0 +1,33 @@
+package com.digitalbooks.bookService.mockData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.digitalbooks.bookService.common.BookCategory;
+import com.digitalbooks.bookService.entity.Author;
+import com.digitalbooks.bookService.entity.Book;
+
+public class MockData {
+	public  List<Book> books = new ArrayList<Book>();
+	public  List<Author> authors = new ArrayList<Author>();
+	public MockData(){
+		Author author = new Author();
+		author.setId(1);
+		author.setName("Author1");
+		author.setAboutAuthor("Author Details");
+		authors.add(author);
+	Book book = new Book();
+	book.setId(1);
+	book.setActive(true);
+	book.setAuthor(authors.get(0));
+	book.setTitle("Book1");
+	book.setCategory(BookCategory.COMIC);
+	book.setContent("Content1");
+	book.setImage("image");
+	book.setPrice(200.0);
+	book.setPublishDate("22-10-2021");
+	book.setPublisher("A");
+	books.add(book);
+	
+	}
+}

@@ -1,0 +1,27 @@
+package com.digitalbooks.userService.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.userService.controller.SubscriptionRequest;
+import com.digitalbooks.userService.entity.BUser;
+import com.digitalbooks.userService.entity.Subscription;
+import com.digitalbooks.userService.repository.UserRepository;
+
+@Service
+public class UserService {
+@Autowired
+	private UserRepository userRepo;
+	public BUser save(BUser user) {
+		// TODO Auto-generated method stub
+		return userRepo.save(user);
+	}
+	public Subscription subscribeBook(int userId, int bookId) {
+		Buser user = userRepo.findById(userId).get();
+		if(user.get().getSubscription().
+		return null;
+	}
+
+}

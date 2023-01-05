@@ -1,0 +1,15 @@
+package com.digitalbooks.userService.restclient;
+
+import java.util.List;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.digitalbooks.userService.entity.Book;
+
+@FeignClient(value="books", url = "http://localhost:8081")
+public interface BookClient {
+	 @GetMapping("/moviesapp/v1/movies")
+	    public List<Book> getMovies();
+
+}

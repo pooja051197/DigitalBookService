@@ -1,0 +1,25 @@
+package com.digitalbooks.bookService.controllers;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbooks.bookService.entity.Subscription;
+
+@RestController
+public class ReaderController {
+
+	@PostMapping("reader/{userId}/books/buy/")
+	public ResponseEntity<?> purchaseBook(@PathVariable Long userId,@RequestBody PaymentRequest paymentRequest) {
+		log.debug("Entering into purchaseBook");
+		Subscription subscription=readerService.purchaseBook(userId,paymentRequest);
+		if (payment!=null) {
+			return new ResponseEntity<ResponseMessage>(new ResponseMessage("successfully purchased"), HttpStatus.CREATED);
+		}
+
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+}

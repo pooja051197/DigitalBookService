@@ -1,0 +1,37 @@
+package com.digitalbooks.userService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
+import com.digitalbooks.userService.entity.Author;
+import com.digitalbooks.userService.entity.BUser;
+import com.digitalbooks.userService.service.AuthorService;
+import com.digitalbooks.userService.service.UserService;
+
+@SpringBootApplication
+@EnableFeignClients
+public class UserServiceApplication implements CommandLineRunner {
+@Autowired
+	private UserService userService;
+
+@Autowired
+private AuthorService authService;
+	public static void main(String[] args) {
+		SpringApplication.run(UserServiceApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		
+		authService.save(new Author(1,"Miley","asghagshagh"));
+		authService.save(new Author(2,"John","ghagshaghs"));
+		authService.save(new Author(3,"ALbert","shgdhsgdh"));
+		
+		userService.save(new BUser("demo","demo1","ADMIN"));
+		
+	}
+
+}

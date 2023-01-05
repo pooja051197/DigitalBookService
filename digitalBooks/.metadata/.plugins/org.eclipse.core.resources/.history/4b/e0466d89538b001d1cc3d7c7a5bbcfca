@@ -1,0 +1,18 @@
+package com.digitalbooks.bookService.entity;
+
+public class Book {
+
+	private Integer id;
+
+	private Author author;
+
+	private String tittle;
+	private BookCategory category;
+	private String image;
+	private Double price;
+	private String publishDate;
+	private String publisher;
+	private Boolean active;
+	private String content;
+	private Boolean purchased;
+}

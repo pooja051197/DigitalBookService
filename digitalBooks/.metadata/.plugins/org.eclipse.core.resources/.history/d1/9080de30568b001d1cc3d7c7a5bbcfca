@@ -1,0 +1,10 @@
+package com.digitalbooks.bookService.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.digitalbooks.bookService.entity.Book;
+
+public interface UserRepository extends JpaRepository<Book, Integer> {
+	
+
+}

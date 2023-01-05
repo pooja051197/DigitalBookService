@@ -1,0 +1,13 @@
+package com.digitalbooks.bookService.handler;
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+	@ExceptionHandler(MovieException.class)
+	public ResponseEntity<MyErrorMessage> handleMovieException(MovieException me){
+		return new ResponseEntity<>(
+				new MyErrorMessage(me.getMessage(), me), 
+				HttpStatus.OK
+			);
+	}
+	
+}

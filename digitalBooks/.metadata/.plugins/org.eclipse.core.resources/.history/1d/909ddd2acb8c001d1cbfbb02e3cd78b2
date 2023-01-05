@@ -1,0 +1,21 @@
+package com.digitalbooks.userService.util;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.digitalbooks.userService.entity.Book;
+import com.digitalbooks.userService.restclient.BookClient;
+
+public class BookUtility {
+	
+	@Autowired
+	BookClient bookClient;
+	
+    public Book getBookById(@PathVariable int bookId){
+        System.out.println("Finding Book from Bookservice");     
+        return bookClient.getBookById(bookId);
+    } 
+	
+
+}

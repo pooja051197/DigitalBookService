@@ -1,0 +1,126 @@
+package com.digitalbooks.bookService.services;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.entity.Subscription;
+import com.digitalbooks.bookService.entity.SubscriptionRequest;
+import com.digitalbooks.bookService.entity.UserDetail;
+import com.digitalbooks.bookService.repository.BookRepository;
+import com.digitalbooks.bookService.repository.SubscriptionRepository;
+import com.digitalbooks.bookService.repository.UserRepository;
+
+import ch.qos.logback.core.util.Duration;
+@Service
+public class ReaderService {
+
+	@Autowired
+	UserRepository userRepo;
+	@Autowired
+	BookRepository bookRepo;
+	@Autowired
+	SubscriptionRepository subRepo;
+	
+	public Subscription subscribeBook(int id, SubscriptionRequest subscriptionRequest) {
+		UserDetail user =  userRepo.findById(id).get();
+		Subscription subscription = new Subscription();
+		subscription.setUser(user);
+		subscription.setDate(LocalDate.now());
+		subscription.setTime(LocalTime.now());
+		Set<Book> books = new HashSet<Book>();
+		subscriptionRequest.getBooksIds().forEach(i -> {
+			books.add(bookRepo.findById(i).get());
+		});
+		subscription.setSubscribedBooks(books);
+		for(Book b:books) {
+			b.setSubscribed(true);
+			
+			books.add(b);
+		}
+		bookRepo.saveAll(books);
+		return subRepo.save(subscription);
+		
+	}
+	
+	public Set<Book> getSubscribedBooks(int userId) {
+		List<Subscription> subscribe = subRepo.findByUserId(userId);
+		Set<Book> books = new HashSet<Book>();
+		subscribe.forEach(sub -> {
+			books.addAll(sub.getSubscribedBooks());
+			
+		});
+		if (!books.isEmpty()) {
+			
+			return books;
+		}
+		return Collections.emptySet();
+	}
+
+/*	public Set<Book> getSubscribedBooksbyEmail(String emailId) {
+		List<Subscription> subscribe = subRepo.findbyEmail(emailId);
+		Set<Book> books = new HashSet<Book>();
+		subscribe.forEach(sub -> {
+			books.addAll(sub.getSubscribedBooks());
+		});
+		if (!books.isEmpty()) {
+			return books;
+		}
+		return Collections.emptySet();
+	}*/
+
+	public Set<Book> getSubscribedBooksbyId(int userId, int subId) {
+		List<Subscription> subscribe = subRepo.findByUserId(userId);
+		Set<Book> books = new HashSet<Book>();
+		subscribe.forEach(sub -> {
+			if(sub.getId()==subId) {
+				books.addAll(sub.getSubscribedBooks());
+			}
+			
+		});
+		if (!books.isEmpty()) {
+			return books.stream().filter(b->b.getActive() == true).collect(Collectors.toSet());
+			
+			 
+		}
+		return Collections.emptySet();
+	}
+	
+	public Set<Book> cancelSubscription(int userId, int subId) {
+		List<Subscription> subscribe = subRepo.findByUserId(userId);
+		Set<Book> books = new HashSet<Book>();
+		subscribe.forEach(sub -> {
+			if(sub.getId()==(subId)) {
+				LocalDateTime dateTime =  LocalDateTime.now();
+				LocalDate oldDate= sub.getDate();
+				LocalTime oldTime = sub.getTime();
+				LocalDateTime localDateTime = LocalDateTime.of(oldDate, oldTime);
+				long duration = dateTime.until(localDateTime, ChronoUnit.HOURS);
+				
+				books.addAll(sub.getSubscribedBooks());
+			}
+			
+		});
+		if (!books.isEmpty()) {
+			
+			for(Book b:books) {
+				b.setSubscribed(false);
+				books.add(b);
+			}
+			bookRepo.saveAll(books);
+			return books;
+		}
+		return Collections.emptySet();
+	}
+}

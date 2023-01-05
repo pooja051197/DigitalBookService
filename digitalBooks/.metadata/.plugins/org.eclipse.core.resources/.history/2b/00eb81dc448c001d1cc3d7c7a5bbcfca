@@ -1,0 +1,58 @@
+package com.digitalbooks.userService.service;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.userService.entity.Login;
+import com.digitalbooks.userService.entity.LoginDTO;
+import com.digitalbooks.userService.repository.UserRepository;
+
+@Service
+public class JwtUserDetailsService implements UserDetailsService {
+
+	@Autowired
+	private UserRepository userDao;
+
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	Login user = userDao.findByUsername(username);
+	 PasswordEncoder encoder = new BCryptPasswordEncoder();
+
+     String encodedStr = encoder.encode(user.getPassword());
+		if (user == null) {
+		throw new UsernameNotFoundException("User not found with username: " + username);		}
+
+        if (user.getUsername().equals(username)) {
+            Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
+	        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+            return new User(
+                    user.getUsername(),
+                    encodedStr,
+                    authorities
+                );
+            } else {
+                throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+    
+	
+}
+
+	public Login save(LoginDTO user) {
+		Login newUser = new Login();
+		newUser.setUsername(user.getUsername());
+		newUser.setPassword(user.getPassword());
+		return userDao.save(newUser);
+	}
+
+}

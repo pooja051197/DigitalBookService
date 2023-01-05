@@ -1,0 +1,87 @@
+package com.digitalbooks.bookService.entity;
+
+import com.digitalbooks.bookService.common.BookCategory;
+
+public class Book {
+
+	private Integer id;
+
+	private Author author;
+
+	private String tittle;
+	private BookCategory category;
+	private String image;
+	private Double price;
+	private String publishDate;
+	private String publisher;
+	private Boolean active;
+	private String content;
+	private Boolean purchased;
+
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Author getAuthor() {
+		return author;
+	}
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+	public String getTittle() {
+		return tittle;
+	}
+	public void setTittle(String tittle) {
+		this.tittle = tittle;
+	}
+	public BookCategory getCategory() {
+		return category;
+	}
+	public void setCategory(BookCategory category) {
+		this.category = category;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	public String getPublishDate() {
+		return publishDate;
+	}
+	public void setPublishDate(String publishDate) {
+		this.publishDate = publishDate;
+	}
+	public String getPublisher() {
+		return publisher;
+	}
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public Boolean getPurchased() {
+		return purchased;
+	}
+	public void setPurchased(Boolean purchased) {
+		this.purchased = purchased;
+	}
+}

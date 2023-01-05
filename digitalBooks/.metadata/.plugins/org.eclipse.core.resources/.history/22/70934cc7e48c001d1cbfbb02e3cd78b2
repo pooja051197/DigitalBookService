@@ -1,0 +1,7 @@
+package com.digitalbooks.bookService.repository;
+
+//public interface UserRepository extends JpaRepository<UserDetail, Integer> {
+//	
+//
+//}
+

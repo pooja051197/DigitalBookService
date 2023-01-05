@@ -1,0 +1,5 @@
+package com.digitalbooks.bookService.services;
+
+public class AuthorService {
+
+}

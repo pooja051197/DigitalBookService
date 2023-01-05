@@ -1,0 +1,6 @@
+package com.digitalbooks.userService.entity;
+
+public class ResponseMessage {
+	private String message;
+
+}

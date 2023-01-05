@@ -1,0 +1,22 @@
+package com.digitalbooks.bookService.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.digitalbooks.bookService.common.BookCategory;
+import com.digitalbooks.bookService.entity.Book;
+
+public interface UserRepository extends JpaRepository<Book, Integer> {
+	List<Book> findByAuthorId(Integer id);
+
+	List<Book> findByCategory(BookCategory category);
+
+	List<Book> findByTittleIgnoreCaseOrPublisherIgnoreCaseOrAuthorNameIgnoreCase(String tittle, String publisher,
+			String name);
+
+	List<Book> findByTittleIgnoreCaseOrCategoryOrPriceOrAuthorNameIgnoreCase(String tittle,
+			BookCategory category, Double price,  String authorName);
+	
+
+}

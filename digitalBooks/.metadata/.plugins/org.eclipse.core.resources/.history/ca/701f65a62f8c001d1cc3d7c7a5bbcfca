@@ -1,0 +1,76 @@
+package com.digitalbooks.userService.service;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.userService.entity.Login;
+import com.digitalbooks.userService.entity.LoginDTO;
+import com.digitalbooks.userService.repository.UserRepository;
+
+@Service
+public class JwtUserDetailsService implements UserDetailsService {
+
+	@Autowired
+	private UserRepository userDao;
+
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	Login user = userDao.findByUsername(username);
+//		if (user == null) {
+//			throw new UsernameNotFoundException("User not found with username: " + username);		}
+//		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+//				new ArrayList<>());
+		
+
+        // find user from database where user = :username
+        // userRepo.findByUsername(username);// username, password, roles
+        if ("user1".equals(username)) {
+            Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
+	        authorities.add(new SimpleGrantedAuthority("ROLE_" + "ADMIN"));
+            return new User(
+                    "user1",
+                    "$2a$10$5Q/UZBQH.ArDrvXZfIZrveep0Im/E6rdGRj17uEROHDzRqcWYdI1O",
+                    authorities
+                );
+            } else if ("user2".equals(username)) {
+                Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
+    	        authorities.add(new SimpleGrantedAuthority("ROLE_" + "SELLER"));
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + "BUYER"));
+                return new User(
+                        "user2",
+                        "$2a$10$5Q/UZBQH.ArDrvXZfIZrveep0Im/E6rdGRj17uEROHDzRqcWYdI1O",
+                        authorities
+                    );
+            } else if ("user3".equals(username)) {
+                Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + "BUYER"));
+                return new User(
+                        "user3",
+                        "$2a$10$5Q/UZBQH.ArDrvXZfIZrveep0Im/E6rdGRj17uEROHDzRqcWYdI1O",
+                        authorities
+                    );
+            } else {
+                throw new UsernameNotFoundException("User not found with username: " + username);
+        }
+    
+	
+}
+
+	public Login save(LoginDTO user) {
+		Login newUser = new Login();
+		newUser.setUsername(user.getUsername());
+		newUser.setPassword(user.getPassword());
+		return userDao.save(newUser);
+	}
+
+}

@@ -1,0 +1,33 @@
+package com.digitalbooks.bookService.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.services.AuthorService;
+
+@RestController
+@RequestMapping("/api/v1/digitalbooks/")
+public class AuthorController {
+
+	@Autowired
+	private AuthorService authService;
+	
+	@PostMapping("/{authorid}/books")
+	public Book createBook(@PathVariable int authorid, @RequestBody Book book) {
+		
+		return authService.save(authorid,book) ;
+		
+	}
+	
+	@PostMapping("/{authorid}/book/{bookId}/")
+	public Book editeBook(@PathVariable int authorid, @RequestBody Book book) {
+		
+		return authService.save(authorid,book) ;
+		
+	}
+}

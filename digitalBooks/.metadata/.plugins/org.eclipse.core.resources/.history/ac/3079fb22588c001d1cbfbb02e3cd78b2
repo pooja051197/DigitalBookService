@@ -1,0 +1,5 @@
+package com.digitalbooks.bookService.mockData;
+
+public class MockData {
+
+}

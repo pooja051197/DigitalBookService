@@ -1,0 +1,10 @@
+package com.digitalbooks.userService.entity;
+
+public class SignUpRequest {
+	private int id;
+	private String username;
+	private String password;
+	private String role;
+	private Boolean isAuthor;
+	private String email;
+}

@@ -1,0 +1,6 @@
+package com.digitalbooks.userService.entity;
+
+public class PaymentRequest {
+	private int booksIds;
+
+}

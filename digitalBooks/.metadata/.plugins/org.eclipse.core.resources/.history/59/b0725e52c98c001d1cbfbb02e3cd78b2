@@ -1,0 +1,49 @@
+package com.digitalbooks.userService.restclient;
+
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.digitalbooks.userService.controller.SubscriptionRequest;
+import com.digitalbooks.userService.entity.Book;
+import com.digitalbooks.userService.entity.BookCategory;
+
+
+@FeignClient(value="books", url = "http://localhost:8080/api/v1/digitalbooks/")
+public interface BookClient {
+	 @GetMapping("search")
+	    public List<Book> searchBooks(@RequestParam String title, @RequestParam BookCategory category,
+				@RequestParam Double price, @RequestParam int authorId);
+	 
+	 @PostMapping("{userId}/subscribe/")
+	 public ResponseEntity<?> subscribeBook(@PathVariable int userId,@RequestBody SubscriptionRequest subscrRequest);
+
+	 @GetMapping("reader/{userId}/books/")
+		public Set<Book> getSubscribedBooks(@PathVariable int userId);
+	 
+	 @GetMapping("reader/{userId}/books/{subId}")
+		public Set<Book> getSubscribedBooksbyId(@PathVariable int userId, @PathVariable int subId);
+	 
+	 @PostMapping("{userId}/subscribe/cancel/{subId}")
+		public ResponseEntity<?> cancelSubscription(@PathVariable int userId,@PathVariable int subId);
+	 
+	 @PostMapping("/{authorid}/books")
+		public Book createBook(@PathVariable int authorid, @RequestBody Book book);
+	 
+	 @PutMapping("/{authorid}/book/{bookId}/")
+		public ResponseEntity<Book> editBook(@PathVariable int authorid, @PathVariable int bookId, @RequestBody Book book);
+	 
+	 @PostMapping("/{authorid}/book/{bookId}/block=yes")
+		public ResponseEntity<?> blockBook(@PathVariable int authorid, @PathVariable int bookId) ;
+	 
+	 @PostMapping("/{authorid}/book/{bookId}/block=no")
+		public ResponseEntity<?> unblockBook(@PathVariable int authorid, @PathVariable int bookId);
+}

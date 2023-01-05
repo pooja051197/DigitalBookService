@@ -1,0 +1,7 @@
+package com.digitalbooks.userService.entity;
+
+public class SubscriptionReq {
+	private Book book;
+	private Subscription subscription;
+
+}

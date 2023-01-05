@@ -1,0 +1,16 @@
+package com.digitalbooks.userService.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.digitalbooks.userService.entity.Login;
+import com.digitalbooks.userService.repository.UserRepository;
+
+public class UserService {
+@Autowired
+	private UserRepository userRepo;
+	public Login save(Login user) {
+		// TODO Auto-generated method stub
+		return userRepo.save(user);
+	}
+
+}

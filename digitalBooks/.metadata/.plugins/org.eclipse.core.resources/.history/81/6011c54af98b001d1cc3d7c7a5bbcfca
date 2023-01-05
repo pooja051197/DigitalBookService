@@ -1,0 +1,88 @@
+package com.digitalbooks.bookService.services;
+
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.entity.Subscription;
+import com.digitalbooks.bookService.entity.SubscriptionRequest;
+import com.digitalbooks.bookService.entity.UserDetail;
+import com.digitalbooks.bookService.repository.BookRepository;
+import com.digitalbooks.bookService.repository.SubscriptionRepository;
+import com.digitalbooks.bookService.repository.UserRepository;
+@Service
+public class ReaderService {
+
+	@Autowired
+	UserRepository userRepo;
+	@Autowired
+	BookRepository bookRepo;
+	@Autowired
+	SubscriptionRepository subRepo;
+	
+	public Subscription subscribeBook(int id, SubscriptionRequest subscriptionRequest) {
+		UserDetail user =  userRepo.findById(id).get();
+		Subscription subscription = new Subscription();
+		subscription.setUser(user);
+		subscription.setDate(LocalDate.now());
+		Set<Book> books = new HashSet<Book>();
+		subscriptionRequest.getBooksIds().forEach(i -> {
+			books.add(bookRepo.findById(i).get());
+		});
+		subscription.setSubscribedBooks(books);
+		for(Book b:books) {
+			b.setSubscribed(true);
+			
+			books.add(b);
+		}
+		bookRepo.saveAll(books);
+		return subRepo.save(subscription);
+		
+	}
+	
+	public Set<Book> getSubscribedBooks(int userId) {
+		List<Subscription> subscribe = subRepo.findByUserId(userId);
+		Set<Book> books = new HashSet<Book>();
+		subscribe.forEach(sub -> {
+			books.addAll(sub.getSubscribedBooks());
+			
+		});
+		if (!books.isEmpty()) {
+			
+			return books;
+		}
+		return Collections.emptySet();
+	}
+
+/*	public Set<Book> getSubscribedBooksbyEmail(String emailId) {
+		List<Subscription> subscribe = subRepo.findbyEmail(emailId);
+		Set<Book> books = new HashSet<Book>();
+		subscribe.forEach(sub -> {
+			books.addAll(sub.getSubscribedBooks());
+		});
+		if (!books.isEmpty()) {
+			return books;
+		}
+		return Collections.emptySet();
+	}*/
+
+	public Set<Book> getSubscribedBooksbyId(int subId) {
+		List<Subscription> subscribe = subRepo.findById(subId);
+		Set<Book> books = new HashSet<Book>();
+		subscribe.forEach(sub -> {
+			books.addAll(sub.getSubscribedBooks());
+			
+		});
+		if (!books.isEmpty()) {
+			
+			return books;
+		}
+		return Collections.emptySet();
+	}
+}

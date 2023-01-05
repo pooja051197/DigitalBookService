@@ -1,0 +1,25 @@
+package com.digitalbooks.bookService.mockData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.digitalbooks.bookService.common.BookCategory;
+import com.digitalbooks.bookService.entity.Book;
+
+public class MockData {
+	public  List<Book> books = new ArrayList<Book>();
+	public MockData(){
+	Book book = new Book();
+	book.setId(1);
+	book.setActive(true);
+	book.setAuthor(authors.get(0));
+	book.setTitle("first Book");
+	book.setCategory(BookCategory.COMIC);
+	book.setContent("first book content");
+	book.setImage("url");
+	book.setPrice(100.3);
+	book.setPublishDate("12-11-2021");
+	book.setPublisher("Publisher A");
+	books.add(book);
+	}
+}

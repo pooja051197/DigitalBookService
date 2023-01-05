@@ -1,0 +1,23 @@
+package com.digitalbooks.bookService.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.bookService.common.BookCategory;
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.repository.UserRepository;
+
+@Service
+public class UserService {
+	@Autowired
+	UserRepository userRepo;
+	
+	public List<Book> searchBook(String title, BookCategory category, Double price,  String author){
+		List<Book> books = userRepo.findByTitleIgnoreCaseOrCategoryOrPriceOrAuthorNameIgnoreCase(title, category, price, author)
+		return null;
+		
+	}
+
+}

@@ -1,0 +1,40 @@
+package com.digitalbooks.userService.service;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.userService.controller.SubscriptionRequest;
+import com.digitalbooks.userService.entity.BUser;
+import com.digitalbooks.userService.entity.Subscription;
+import com.digitalbooks.userService.repository.SubscriptionRepository;
+import com.digitalbooks.userService.repository.UserRepository;
+
+@Service
+public class UserService {
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private SubscriptionRepository subRepo;
+
+	public BUser save(BUser user) {
+		// TODO Auto-generated method stub
+		return userRepo.save(user);
+	}
+	public Subscription subscribeBook(int userId, int bookId) {
+		BUser user = userRepo.findById(userId).get();
+		Subscription sub = new Subscription();
+		sub.setBookID(bookId);
+		sub.setTime(LocalTime.now());
+		sub.setDate(LocalDate.now());
+		
+		subRepo.save(sub);
+		return user.getSubscription().add(sub);
+		
+	}
+
+}

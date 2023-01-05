@@ -1,0 +1,12 @@
+package com.digitalbooks.userService.service;
+
+import com.digitalbooks.userService.entity.Login;
+
+public class UserService {
+
+	public Login save(Login login) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,61 @@
+package com.digitalbooks.userService.controller;
+
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbooks.userService.entity.Book;
+import com.digitalbooks.userService.entity.BookCategory;
+import com.digitalbooks.userService.restclient.BookClient;
+
+@RestController
+public class BookController {
+	
+	@Autowired
+ private BookClient bookClient;
+	
+	@GetMapping("/books")
+    public List<Book> getMovies(@RequestParam String title, @RequestParam BookCategory category,
+			@RequestParam Double price, @RequestParam String authorName){
+        System.out.println("Finding Book from Bookservice");
+      
+        return bookClient.searchBooks(title,category,price,authorName);
+    } 
+	
+	
+	@PostMapping("/subscribe/")
+    public ResponseEntity<?>  subscribeBook(@PathVariable int userId,@RequestBody SubscriptionRequest subscrRequest){
+        System.out.println("Finding Book from Bookservice");
+      
+        return bookClient.subscribeBook(userId, subscrRequest);
+    }
+	
+	@GetMapping("reader/{userId}/books/")
+	public Set<Book> getSubscribedBooks(@PathVariable int userId) {
+		return bookClient.getSubscribedBooks(userId);
+		
+	}
+
+	@GetMapping("reader/{userId}/books/{subId}")
+	public Set<Book> getSubscribedBooksbyId(@PathVariable int userId, @PathVariable int subId) {
+		return getSubscribedBooksbyId(userId, subId);
+	}
+	
+	@PostMapping("{userId}/subscribe/cancel/{subId}")
+	public ResponseEntity<?> cancelSubscription(@PathVariable int userId,@PathVariable int subId) {
+		return cancelSubscription(userId, subId);
+	}
+	
+	@PostMapping("/{authorid}/books")
+	public Book createBook(@PathVariable int authorid, @RequestBody Book book) {
+		return createBook(authorid, book);
+	}
+}

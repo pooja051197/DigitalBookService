@@ -1,0 +1,15 @@
+package com.digitalbooks.bookService.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.digitalbooks.bookService.common.BookCategory;
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.entity.UserDetail;
+
+public interface UserRepository extends JpaRepository<UserDetail, Integer> {
+	
+
+}
+

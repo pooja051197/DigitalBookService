@@ -1,0 +1,5 @@
+package com.digitalbooks.pwd.utils;
+
+public class BcryptPwdDemo {
+
+}

@@ -1,0 +1,25 @@
+package com.digitalbooks.userService.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+public class UserController {
+        @Autowired
+	private UserDetails users;
+	
+        @PostMapping("/signp")
+        public Login signUP(@ResponseBody Login user){
+            return users.save; 
+        }
+
+    }
+
+

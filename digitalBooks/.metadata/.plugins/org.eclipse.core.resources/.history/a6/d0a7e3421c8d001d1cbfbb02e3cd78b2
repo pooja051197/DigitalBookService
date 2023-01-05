@@ -1,0 +1,5 @@
+package com.digitalbooks.bookService.common;
+
+public enum BookCategory {
+ADVENTURE, DRAMA, COMIC, DDD
+}

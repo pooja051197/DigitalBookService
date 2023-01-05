@@ -1,0 +1,7 @@
+package com.digitalbooks.bookService.entity;
+
+public class ResponseMessage {
+	private String message;
+	
+
+}

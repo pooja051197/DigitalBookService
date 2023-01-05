@@ -1,0 +1,28 @@
+package com.digitalbooks.bookService.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.bookService.entity.Author;
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.repository.AuthorRepository;
+import com.digitalbooks.bookService.repository.BookRepository;
+
+@Service
+public class AuthorService {
+
+	@Autowired
+	private AuthorRepository authRepo;
+	@Autowired
+	private BookRepository bookrepo;
+	
+	public Author savAuthor(Author auth) {
+		return repo.save(auth);
+		
+	}
+	
+	public Book save(int authorId, Book book) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

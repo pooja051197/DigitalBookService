@@ -1,0 +1,13 @@
+package com.digitalbooks.userService.entity;
+
+public class AuthenticationResponse {
+
+	private int id;
+	private String username;
+	private String password;
+	private String token;
+	private  String email;
+	private String role;
+	
+	
+}

@@ -1,0 +1,5 @@
+package com.digitalbooks.bookService.repository;
+
+public interface SubscriptionRepository {
+
+}

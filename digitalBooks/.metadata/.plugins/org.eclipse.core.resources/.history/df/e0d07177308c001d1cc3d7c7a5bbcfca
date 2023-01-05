@@ -1,0 +1,25 @@
+package com.digitalbooks.userService;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.digitalbooks.userService.entity.Login;
+import com.digitalbooks.userService.repository.UserRepository;
+import com.digitalbooks.userService.service.UserService;
+
+@SpringBootApplication
+public class UserServiceApplication implements CommandLineRunner {
+
+	UserService repo;
+	public static void main(String[] args) {
+		SpringApplication.run(UserServiceApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		repo.save(new Login("demo","demo1"));
+		
+	}
+
+}

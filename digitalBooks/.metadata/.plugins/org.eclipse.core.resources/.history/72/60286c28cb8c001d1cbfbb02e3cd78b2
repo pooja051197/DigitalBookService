@@ -1,0 +1,5 @@
+package com.digitalbooks.userService.util;
+
+public class BookUtility {
+
+}

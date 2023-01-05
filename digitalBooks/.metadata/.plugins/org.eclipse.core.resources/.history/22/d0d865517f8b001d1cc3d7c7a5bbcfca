@@ -1,0 +1,11 @@
+package com.digitalbooks.userService.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+
+import com.digitalbooks.userService.entity.Login;
+
+public interface UserRepository extends CrudRepository<Login, Integer> {
+	Login findByUsername(String username);
+
+}

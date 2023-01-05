@@ -1,0 +1,5 @@
+package com.digitalbooks.bookService.handler;
+
+public class GlobalExceptionHandler {
+
+}

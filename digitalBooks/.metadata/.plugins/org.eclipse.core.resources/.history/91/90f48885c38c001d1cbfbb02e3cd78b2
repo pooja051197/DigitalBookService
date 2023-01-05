@@ -1,0 +1,12 @@
+package com.digitalbooks.userService.entity;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class Subscription {
+
+	private int id;
+	private LocalDate date;
+	private LocalTime time;
+
+}

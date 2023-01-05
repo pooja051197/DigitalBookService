@@ -1,0 +1,16 @@
+package com.digitalbooks.userService.entity;
+
+import java.util.Set;
+
+public class SubscriptionRequest {
+	private Set<Integer> booksIds;
+
+	public int getBooksIds() {
+		return booksIds;
+	}
+
+	public void setBooksIds(int booksIds) {
+		this.booksIds = booksIds;
+	}
+
+}

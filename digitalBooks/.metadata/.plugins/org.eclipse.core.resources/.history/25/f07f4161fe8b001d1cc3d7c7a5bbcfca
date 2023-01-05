@@ -1,0 +1,40 @@
+package com.digitalbooks.bookService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.digitalbooks.bookService.entity.Author;
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.services.AuthorService;
+import com.digitalbooks.bookService.services.BookService;
+import com.digitalbooks.bookService.services.UserService;
+
+@SpringBootApplication
+public class BookServiceApplication implements CommandLineRunner {
+
+	@Autowired
+	private AuthorService authService;
+	
+	@Autowired
+	private BookService bookService;
+	
+	@Autowired
+	private UserService userService;
+	@Override
+	public void run(String... args) throws Exception {
+		authService.savAuthor(new Author(1,"txt","Miley"));
+		authService.savAuthor(new Author(2,"tYYYxt","John"));
+		authService.savAuthor(new Author(3,"JJJJ","Albert"));
+		
+		bookService.saveBook(new Book(1,false,2,"efsdcdsff","abc.jpg",2000,"09/10/2022","ABC",false,"Spiderman",1));
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(BookServiceApplication.class, args);
+	}
+
+	
+
+}

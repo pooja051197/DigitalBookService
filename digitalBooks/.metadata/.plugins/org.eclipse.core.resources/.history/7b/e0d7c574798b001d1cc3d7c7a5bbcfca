@@ -1,0 +1,9 @@
+ackage com.digitalbooks.userService.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.digitalbooks.userService.entity.Book;
+
+public interface BookRepository extends JpaRepository<Book, Integer> {
+
+}

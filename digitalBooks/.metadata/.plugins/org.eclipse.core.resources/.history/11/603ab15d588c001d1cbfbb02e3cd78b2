@@ -1,0 +1,11 @@
+package com.digitalbooks.bookService.mockData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.digitalbooks.bookService.entity.Book;
+
+public class MockData {
+	public  List<Book> books = new ArrayList<Book>();
+
+}

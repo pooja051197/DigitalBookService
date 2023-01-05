@@ -1,0 +1,21 @@
+package com.digitalbooks.bookService.controllers;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.digitalbooks.bookService.common.BookCategory;
+import com.digitalbooks.bookService.entity.Book;
+
+@RestController
+@RequestMapping("/")
+public class UserController {
+	
+	public List<Book> searchBook(@RequestParam String tittle, @RequestParam BookCategory category,
+			@RequestParam Double price, @RequestParam String authorName){
+		return null;
+		
+	}
+}

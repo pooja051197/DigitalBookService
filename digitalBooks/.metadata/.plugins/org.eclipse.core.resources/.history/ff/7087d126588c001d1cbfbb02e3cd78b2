@@ -1,0 +1,6 @@
+package com.digitalbooks.bookService.mockData;
+
+public class MockData {
+	public  List<Book> books = new ArrayList<Book>();
+
+}

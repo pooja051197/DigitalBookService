@@ -1,0 +1,7 @@
+package com.digitalbooks.userService.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SubscriptionRepository extends JpaRepository<T, ID> {
+
+}

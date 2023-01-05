@@ -1,0 +1,6 @@
+package com.digitalbooks.userService.entity;
+
+public class LoginDTO {
+
+}private String username;
+private String password;

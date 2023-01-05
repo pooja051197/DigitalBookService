@@ -1,0 +1,73 @@
+package com.digitalbooks.bookService.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.digitalbooks.bookService.entity.Author;
+import com.digitalbooks.bookService.entity.Book;
+import com.digitalbooks.bookService.repository.AuthorRepository;
+import com.digitalbooks.bookService.repository.BookRepository;
+import com.digitalbooks.bookService.repository.UserRepository;
+
+@Service
+public class AuthorService {
+
+	@Autowired
+	private AuthorRepository authRepo;
+	@Autowired
+	private BookRepository bookRepo;
+	@Autowired
+	private UserRepository userRepo;
+	
+	public Author savAuthor(Author auth) {
+		return authRepo.save(auth);
+		
+	}
+	
+	public Book save(int authorId, Book book) {
+		//List<Book> books = bookRepo.findbyAuthorId(authorId);
+		return bookRepo.save(book);
+	}
+
+	public Book editBook(int authorid, int bookId, Book book) {
+
+		Optional<Book> originalBook =bookRepo.findById(bookId);
+		if(originalBook.isPresent()) {
+			originalBook.get().setActive(book.getActive());
+			originalBook.get().setCategory(book.getCategory());
+			originalBook.get().setContent(book.getContent());
+			originalBook.get().setPrice(book.getPrice());
+			originalBook.get().setPublishDate(book.getPublishDate());
+			originalBook.get().setPublisher(book.getPublisher());
+			originalBook.get().setTitle(book.getTitle());
+			return bookRepo.save(originalBook.get());
+		}
+		return null;
+	
+	}
+
+	public Book blockBook(int authorid, int bookId) {
+		Optional<Book> originalBook =bookRepo.findById(bookId);
+		if(originalBook.isPresent()) {
+			originalBook.get().setActive(false);
+			return bookRepo.save(originalBook.get());
+		}
+		return null;
+	}
+
+	public Book unblockBook(int authorid, int bookId) {
+		Optional<Book> originalBook =bookRepo.findById(bookId);
+		if(originalBook.isPresent()) {
+			originalBook.get().setActive(true);
+			return bookRepo.save(originalBook.get());
+		}
+		return null;
+	}
+	
+	public Author getAuthor(int id) {
+		return authRepo.getById(id);
+	}
+}
